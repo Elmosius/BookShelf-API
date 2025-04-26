@@ -1,11 +1,11 @@
+import { defineConfig } from 'eslint/config';
+import js from '@eslint/js';
 import globals from 'globals';
-import pluginJs from '@eslint/js';
 import daStyle from 'eslint-config-dicodingacademy';
 
-
-export default [
+export default defineConfig([
   daStyle,
+  { files: ['**/*.{js,mjs,cjs}'], plugins: { js }, extends: ['js/recommended'] },
   { files: ['**/*.js'], languageOptions: { sourceType: 'commonjs' } },
-  { languageOptions: { globals: globals.node } },
-  pluginJs.configs.recommended,
-];
+  { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: { ...globals.browser, ...globals.node } } },
+]);
